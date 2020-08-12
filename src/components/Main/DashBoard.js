@@ -17,11 +17,41 @@ const DashBoard = () =>{
         flag:false,
         index:null
     })
+    const [ischeck,setIsCheck]=useState({
+        complete:true,
+        way:false,
+        room:false,
+        recived:false
+    })
     const[newOffice,setNewOffice]=useState([
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"}
+    ])
+    const[complete,setComplete]=useState([
+        {roomBorderColor:"g-l-b",roomTitle:"Room#1",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"y-l-b",roomTitle:"Room#2",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"r-l-b",roomTitle:"Room#3",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"b-l-b",roomTitle:"Room#4",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+    ])
+    const[ontheWay,setOntheWay]=useState([
+        {roomBorderColor:"g-l-b",roomTitle:"Room#5",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"y-l-b",roomTitle:"Room#6",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"r-l-b",roomTitle:"Room#7",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"b-l-b",roomTitle:"Room#8",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+    ])
+    const[room,setRoom]=useState([
+        {roomBorderColor:"g-l-b",roomTitle:"Room#9",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"y-l-b",roomTitle:"Room#10",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"r-l-b",roomTitle:"Room#11",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"b-l-b",roomTitle:"Room#12",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+    ])
+    const[recieved,setRecieved]=useState([
+        {roomBorderColor:"g-l-b",roomTitle:"Room#13",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"y-l-b",roomTitle:"Room#14",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"r-l-b",roomTitle:"Room#15",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+        {roomBorderColor:"b-l-b",roomTitle:"Room#16",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
     ])
     const[newButton,setNewButton]=useState([
         {BtnText:"ACTION #7",BtnColor:"#15d1a5"},
@@ -85,6 +115,20 @@ const DashBoard = () =>{
             document.getElementById('office-main-screen').style.display="none";
         }
     }
+    const checkFilter = (e) =>{
+        if(e==="Complete"){
+            setIsCheck({...ischeck,complete:true,way:false,recived:false,room:false});
+        }
+        else if(e==="Way"){
+            setIsCheck({...ischeck,complete:false,way:true,recived:false,room:false});
+        }
+        else if(e==="Room"){
+            setIsCheck({...ischeck,complete:false,way:false,recived:false,room:true});
+        }
+        else if(e==="Recived"){
+            setIsCheck({...ischeck,complete:false,way:false,recived:true,room:false});
+        }
+    }
     return(
         <section id="dashBoard">
             <div className="container-fluid">
@@ -139,11 +183,10 @@ const DashBoard = () =>{
                                             <div className="col-lg-8 col-md-8">
                                                 <div className="badgeDiv">
                                                     <span>Filter By:</span>
-                                                    <span className="btn btn-success">Complete</span>
-                                                    <span className="btn btn-danger">On the Way</span>
-                                                    
-                                                    <span className="btn btn-info">In Room</span>
-                                                    <span className="btn btn-warning">Recived</span>
+                                                    <span onClick={() => checkFilter('Complete')} className="btn btn-success">Complete</span>
+                                                    <span onClick={() => checkFilter('Way')} className="btn btn-danger">On the Way</span>
+                                                    <span onClick={() => checkFilter('Room')} className="btn btn-info">In Room</span>
+                                                    <span onClick={() => checkFilter('Recived')} className="btn btn-warning">Recived</span>
                                                 </div>
                                             </div>
                                             <div className="col-lg-4 col-md-4">
@@ -160,56 +203,90 @@ const DashBoard = () =>{
                                     </div>
                                 </div>
                             </div>
+                            {ischeck.complete && 
                                 <div className="room-details">
                                     <div className="container-fluid">
                                         <div className="row">
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail y-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
+                                            {complete.map((item,index)=>(
+                                                <div className="col-lg-3 col-md-6">
+                                                    <div className="roomCard">
+                                                        <div className={item.roomBorderColor+" roomDetail"}>
+                                                            <h3>{item.roomTitle}</h3>
+                                                            <p className="text">{item.roomSubtitle}</p>
+                                                            <p className="text">{item.roomTime}</p>
+                                                            <hr/>
+                                                            <p><strong>{item.roomDspTitle}</strong> {item.roomAccpetAt} <strong>{item.roomAccpetTime}</strong></p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail b-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail g-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail r-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
+                            }
+                            {ischeck.way && 
+                                <div className="room-details">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            {ontheWay.map((item,index)=>(
+                                                <div className="col-lg-3 col-md-6">
+                                                    <div className="roomCard">
+                                                        <div className={item.roomBorderColor+" roomDetail"}>
+                                                            <h3>{item.roomTitle}</h3>
+                                                            <p className="text">{item.roomSubtitle}</p>
+                                                            <p className="text">{item.roomTime}</p>
+                                                            <hr/>
+                                                            <p><strong>{item.roomDspTitle}</strong> {item.roomAccpetAt} <strong>{item.roomAccpetTime}</strong></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {ischeck.room && 
+                                <div className="room-details">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            {room.map((item,index)=>(
+                                                <div className="col-lg-3 col-md-6">
+                                                    <div className="roomCard">
+                                                        <div className={item.roomBorderColor+" roomDetail"}>
+                                                            <h3>{item.roomTitle}</h3>
+                                                            <p className="text">{item.roomSubtitle}</p>
+                                                            <p className="text">{item.roomTime}</p>
+                                                            <hr/>
+                                                            <p><strong>{item.roomDspTitle}</strong> {item.roomAccpetAt} <strong>{item.roomAccpetTime}</strong></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {ischeck.recived && 
+                                <div className="room-details">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            {recieved.map((item,index)=>(
+                                                <div className="col-lg-3 col-md-6">
+                                                    <div className="roomCard">
+                                                        <div className={item.roomBorderColor+" roomDetail"}>
+                                                            <h3>{item.roomTitle}</h3>
+                                                            <p className="text">{item.roomSubtitle}</p>
+                                                            <p className="text">{item.roomTime}</p>
+                                                            <hr/>
+                                                            <p><strong>{item.roomDspTitle}</strong> {item.roomAccpetAt} <strong>{item.roomAccpetTime}</strong></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                             </div>
                             <div id="history" className="tab-pane fade">
                                 <h3>Historical Support Request</h3>
@@ -353,73 +430,144 @@ const DashBoard = () =>{
                             </div>
                             <div id="offices" className="tab-pane fade">
                                 <div id="office-main-screen">
-                                    <div class="modal fade" id="myModal" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">New Room</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
-                                                <div className="formDiv">
-                                                    <div className="container-fluid">
-                                                        <div className="row">
-                                                            <div className="col-lg-6">
-                                                                <div class="input-group">
-                                                                    <input className="w-100" type="text" required name="office-name" id="office-name"/>
-                                                                    <span class="highlight"></span>
-                                                                    <span class="bar"></span>
-                                                                    <label>Name Offices</label>
+                                    <div className="newOfficeMakeModal">
+                                        <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">New Room</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
+                                                        <div className="formDiv">
+                                                            <div className="container-fluid">
+                                                                <div className="row">
+                                                                    <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input className="w-100" type="text" required name="office-name" id="office-name"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>Name Offices</label>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input type="text" required id="location" className="w-100"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>Loation</label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                
-                                                            </div>
-                                                            <div className="col-lg-6">
-                                                                <div class="input-group">
-                                                                    <input type="text" required id="location" className="w-100"/>
-                                                                    <span class="highlight"></span>
-                                                                    <span class="bar"></span>
-                                                                    <label>Loation</label>
+                                                                <div className="row m-t-20">
+                                                                    <div className="col-lg-12">
+                                                                        <div class="input-group">
+                                                                            <input type="text" required id="request" className="w-100"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>Button Request</label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row m-t-20">
-                                                            <div className="col-lg-12">
-                                                                <div class="input-group">
-                                                                    <input type="text" required id="request" className="w-100"/>
-                                                                    <span class="highlight"></span>
-                                                                    <span class="bar"></span>
-                                                                    <label>Button Request</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row m-t-20">
-                                                            <div className="col-lg-5">
-                                                                <div className="uploadImage">
-                                                                    <FontAwesomeIcon icon={faCamera}/>
-                                                                    <p>Drop your logo here or</p>
-                                                                <label for="file-input"><span >Upload a Image</span>
-                                                                    <input id="file-input" type="file" />
-                                                                    </label> 
-    
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-lg-7">
-                                                                <div className="imgContentDiv">
-                                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                                <div className="row m-t-20">
+                                                                    <div className="col-lg-5">
+                                                                        <div className="uploadImage">
+                                                                            <FontAwesomeIcon icon={faCamera}/>
+                                                                            <p>Drop your logo here or</p>
+                                                                        <label for="file-input"><span >Upload a Image</span>
+                                                                            <input id="file-input" type="file" />
+                                                                            </label> 
+            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-lg-7">
+                                                                        <div className="imgContentDiv">
+                                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">CANCEL</button>
+                                                    <button type="button" class="btn btn-default createRoomBtn" data-dismiss="modal" onClick={submitForm}>CREATE ROOM</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">CANCEL</button>
-                                            <button type="button" class="btn btn-default createRoomBtn" data-dismiss="modal" onClick={submitForm}>CREATE ROOM</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div className="editOfficeMakeModal">
+                                        <div class="modal fade" id="editModal" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Edit Room</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
+                                                        <div className="formDiv">
+                                                            <div className="container-fluid">
+                                                                <div className="row">
+                                                                    <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input className="w-100" type="text" required name="office-name" id="office-name"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>Name Offices</label>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input type="text" required id="location" className="w-100"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>Loation</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="row m-t-20">
+                                                                    <div className="col-lg-12">
+                                                                        <div class="input-group">
+                                                                            <input type="text" required id="request" className="w-100"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>Button Request</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="row m-t-20">
+                                                                    <div className="col-lg-5">
+                                                                        <div className="uploadImage">
+                                                                            <FontAwesomeIcon icon={faCamera}/>
+                                                                            <p>Drop your logo here or</p>
+                                                                        <label for="file-input"><span >Upload a Image</span>
+                                                                            <input id="file-input" type="file" />
+                                                                            </label> 
+            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-lg-7">
+                                                                        <div className="imgContentDiv">
+                                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">CANCEL</button>
+                                                    <button type="button" class="btn btn-default createRoomBtn" data-dismiss="modal">UPDATE ROOM</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="container-fluid">
                                         <div className="row">
                                             <div className="col-lg-3 col-md-3 col-sm-3">
@@ -433,7 +581,6 @@ const DashBoard = () =>{
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div className="new-offices-div">
                                         <div className="container-fluid">
                                             <div className="row">
@@ -447,7 +594,7 @@ const DashBoard = () =>{
                                                                     isShow.flag && isShow.index===index&&
                                                                     <div className="office-dropDown">
                                                                     <p type="button" data-toggle="modal" data-target="#QRCode"><a>View QR Code</a></p>
-                                                                    <p><a>Edit Room</a></p>
+                                                                    <p data-toggle="modal" data-target="#editModal" ><a>Edit Room</a></p>
                                                                     <p><a>Delete Room</a></p>
                                                                 </div>
                                                                 }
@@ -903,7 +1050,7 @@ const DashBoard = () =>{
                                             <div className="row">
                                                 <div className="col-lg-12 p-0">
                                                     <div className="newBtnDiv">
-                                                        <a><FontAwesomeIcon icon={faPlus}/> NEW BUTTON</a>
+                                                        <a type="button"  data-toggle="modal" data-target="#buttonModal" className="modalBtn"><FontAwesomeIcon icon={faPlus}/> NEW BUTTON</a>
                                                     </div>
                                                 </div>
                                             </div>
