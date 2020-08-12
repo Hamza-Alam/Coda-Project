@@ -18,7 +18,8 @@ const DashBoard = () =>{
         index:null
     })
     const [ischeck,setIsCheck]=useState({
-        complete:true,
+        allRoom:true,
+        complete:false,
         way:false,
         room:false,
         recived:false
@@ -30,28 +31,22 @@ const DashBoard = () =>{
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"}
     ])
     const[complete,setComplete]=useState([
+        {roomBorderColor:"g-l-b",roomTitle:"Room#1",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"}
+    ])
+    const[ontheWay,setOntheWay]=useState([
+        {roomBorderColor:"r-l-b",roomTitle:"Room#3",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"}
+    ])
+    const[room,setRoom]=useState([
+        {roomBorderColor:"b-l-b",roomTitle:"Room#4",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"}
+    ])
+    const[recieved,setRecieved]=useState([
+        {roomBorderColor:"y-l-b",roomTitle:"Room#2",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
+    ])
+    const[allRoom,setAllRoom]=useState([
         {roomBorderColor:"g-l-b",roomTitle:"Room#1",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
         {roomBorderColor:"y-l-b",roomTitle:"Room#2",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
         {roomBorderColor:"r-l-b",roomTitle:"Room#3",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
         {roomBorderColor:"b-l-b",roomTitle:"Room#4",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-    ])
-    const[ontheWay,setOntheWay]=useState([
-        {roomBorderColor:"g-l-b",roomTitle:"Room#5",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"y-l-b",roomTitle:"Room#6",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"r-l-b",roomTitle:"Room#7",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"b-l-b",roomTitle:"Room#8",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-    ])
-    const[room,setRoom]=useState([
-        {roomBorderColor:"g-l-b",roomTitle:"Room#9",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"y-l-b",roomTitle:"Room#10",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"r-l-b",roomTitle:"Room#11",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"b-l-b",roomTitle:"Room#12",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-    ])
-    const[recieved,setRecieved]=useState([
-        {roomBorderColor:"g-l-b",roomTitle:"Room#13",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"y-l-b",roomTitle:"Room#14",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"r-l-b",roomTitle:"Room#15",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
-        {roomBorderColor:"b-l-b",roomTitle:"Room#16",roomSubtitle:"Support Request",roomTime:"05:35 PM",roomDspTitle:"Mortin Camiletti",roomAccpetAt:"accepted at 05:35 PM",roomAccpetTime:"05:35 PM"},
     ])
     const[newButton,setNewButton]=useState([
         {BtnText:"ACTION #7",BtnColor:"#15d1a5"},
@@ -117,16 +112,16 @@ const DashBoard = () =>{
     }
     const checkFilter = (e) =>{
         if(e==="Complete"){
-            setIsCheck({...ischeck,complete:true,way:false,recived:false,room:false});
+            setIsCheck({...ischeck,allRoom:false,complete:true,way:false,recived:false,room:false});
         }
         else if(e==="Way"){
-            setIsCheck({...ischeck,complete:false,way:true,recived:false,room:false});
+            setIsCheck({...ischeck,allRoom:false,complete:false,way:true,recived:false,room:false});
         }
         else if(e==="Room"){
-            setIsCheck({...ischeck,complete:false,way:false,recived:false,room:true});
+            setIsCheck({...ischeck,allRoom:false,complete:false,way:false,recived:false,room:true});
         }
         else if(e==="Recived"){
-            setIsCheck({...ischeck,complete:false,way:false,recived:true,room:false});
+            setIsCheck({...ischeck,allRoom:false,complete:false,way:false,recived:true,room:false});
         }
     }
     return(
@@ -203,6 +198,27 @@ const DashBoard = () =>{
                                     </div>
                                 </div>
                             </div>
+                            {ischeck.allRoom &&
+                                <div className="room-details">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            {allRoom.map((item,index)=>(
+                                                <div className="col-lg-3 col-md-6">
+                                                    <div className="roomCard">
+                                                        <div className={item.roomBorderColor+" roomDetail"}>
+                                                            <h3>{item.roomTitle}</h3>
+                                                            <p className="text">{item.roomSubtitle}</p>
+                                                            <p className="text">{item.roomTime}</p>
+                                                            <hr/>
+                                                            <p><strong>{item.roomDspTitle}</strong> {item.roomAccpetAt} <strong>{item.roomAccpetTime}</strong></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                             {ischeck.complete && 
                                 <div className="room-details">
                                     <div className="container-fluid">
