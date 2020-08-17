@@ -751,8 +751,8 @@ const DashBoard = () =>{
                                         </div>
                                         <div className="col-lg-6 col-md-6 col-sm-6">
                                             <div className="new-user">
-                                                <span> 
-                                                    <a>NEW USER</a>
+                                                <span className="newUser" data-toggle="modal" data-target="#userModal"> 
+                                                    <a >NEW USER</a>
                                                 </span>
                                             </div>
                                         </div>
@@ -880,6 +880,78 @@ const DashBoard = () =>{
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="userModal" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">New User</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div className="formDiv">
+                                                            <div className="container-fluid">
+                                                                <div className="row">
+                                                                    <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input className="w-100" type="text" required name="office-name" id="office-name"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>User Name</label>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input type="text" required id="location" className="w-100"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>User Role</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="row m-t-20">
+                                                                <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input className="w-100" type="text" required name="office-name" id="office-name"/>
+                                                                            <span class="highlight"></span>
+                                                                            <span class="bar"></span>
+                                                                            <label>User Office</label>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <div className="col-lg-6">
+                                                                        <div class="input-group">
+                                                                            <input type="date" required id="location" className="w-100"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="row m-t-20">
+                                                                    <div className="col-lg-5">
+                                                                        <div className="uploadImage">
+                                                                            <FontAwesomeIcon icon={faCamera}/>
+                                                                            <p>Drop your logo here or</p>
+                                                                        <label for="file-input"><span >Upload a Image</span>
+                                                                            <input id="file-input" type="file" />
+                                                                            </label> 
+            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-lg-7">
+                                                                        <div className="imgContentDiv">
+                                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">CANCEL</button>
+                                                    <button type="button" class="btn btn-default createRoomBtn" data-dismiss="modal" onClick={submitForm}>CREATE USER</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                             </div>
                             <div id="setting" className="tab-pane fade">
                                 <h3>About you</h3>
