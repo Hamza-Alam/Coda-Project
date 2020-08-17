@@ -956,6 +956,9 @@ button.close:focus{
 #QRCode .modal-footer a{
     color: #fff;
 }
+.newUser{
+    cursor: pointer;
+}
 /**************** Media Query ***********/
 @media(max-width:1200px)
 {
